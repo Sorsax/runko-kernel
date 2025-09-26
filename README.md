@@ -1,7 +1,8 @@
 
 # runko-kernel
 
-Pienimuotoinen käyttöjärjestelmän ydinprojekti C:llä ja assemblyllä.
+Pienoinen vapaa-ajan harrasteprojekti C:n oppimiseen
+Tietysti assyäkin tulee opittua mutta lähinnä stackoverflow pohjaisesti sillä osastolla
 
 ## Ominaisuudet
 - Perus muistinhallinta (heap, malloc/free)
