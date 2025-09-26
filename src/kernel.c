@@ -4,6 +4,8 @@
 #include "io.h"
 #include "task.h"
 #include "syscall.h"
+#include "timer.h"
+#include "isr.h"
 
 void print(const char *str, int row) {
     char *vidptr = (char*)0xb8000 + row * 160;
@@ -40,6 +42,8 @@ void demo_task() {
 }
 
 void kernel_main(void) {
+    isr_install();
+    timer_init(100);
     mem_init(0x100000, 0x10000);
     syscall_init();
     print("runko-kernel: Memory/CPU/IO demo", 0);

@@ -9,8 +9,13 @@ all: $(BUILD)/$(ISO_NAME)
 
 
 
-$(BUILD)/kernel.bin: $(SRC)/boot.o $(SRC)/kernel.o $(SRC)/mem.o $(SRC)/cpu.o $(SRC)/io.o $(SRC)/task.o $(SRC)/syscall.o $(SRC)/shell.o linker.ld
+$(BUILD)/kernel.bin: $(SRC)/boot.o $(SRC)/kernel.o $(SRC)/mem.o $(SRC)/cpu.o $(SRC)/io.o $(SRC)/task.o $(SRC)/syscall.o $(SRC)/shell.o $(SRC)/timer.o $(SRC)/isr.o linker.ld
 	ld -T linker.ld -o $@ $^
+
+$(SRC)/timer.o: $(SRC)/timer.c
+	gcc -m32 -ffreestanding -c $< -o $@
+$(SRC)/isr.o: $(SRC)/isr.c
+	gcc -m32 -ffreestanding -c $< -o $@
 
 $(SRC)/shell.o: $(SRC)/shell.c
 	gcc -m32 -ffreestanding -c $< -o $@
