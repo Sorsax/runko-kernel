@@ -1,41 +1,26 @@
-
 # runko-kernel
 
-Pienoinen vapaa-ajan harrasteprojekti C:n oppimiseen
-Tietysti assyäkin tulee opittua mutta lähinnä stackoverflow pohjaisesti sillä osastolla
+A small hobby project for learning C.  
 
-## Ominaisuudet
-- Perus muistinhallinta (heap, malloc/free)
-- Prosessinhallinta (yksinkertainen tehtävienhallinta, round-robin)
-- I/O (porttiluku, ruudulle tulostus)
-- Yksinkertainen shell (komentorivi, komennot: help, echo)
-- System call -rajapinta (syscall)
+## Features
+- Basic memory management (heap, malloc/free)
+- Process management (simple task scheduler, round-robin)
+- I/O (port reading, screen output)
+- Simple shell (command line, commands: help, echo)
+- System call interface (syscall)
 
-## Tiedostorakenne
+## Directory Structure
 - `boot/` — Bootloader (GRUB multiboot)
-- `src/` — Kernelin lähdekoodi (C ja assembly)
-- `build/` — Buildin ulostulo
+- `src/` — Kernel source code (C and assembly)
+- `build/` — Build output
 
-## Build vaatimukset
-- GCC cross-compiler i386:lle
+## Build Requirements
+- GCC cross-compiler for i386
 - `make`
-- QEMU emulointiin
-- grub-mkrescue (GRUB bootloaderin ISO:n tekoon)
+- QEMU for emulation
+- `grub-mkrescue` (for creating a GRUB bootable ISO)
 
-## Rakenna & Aja
+## Build & Run
 ```sh
 make
 make run
-```
-
-## Tiedostot
-- `Makefile` — Käännösjärjestelmä
-- `linker.ld` — Linkkeri
-- `boot/grub.cfg` — GRUB config
-- `src/boot.s` — Kernel entry (assembly)
-- `src/kernel.c` — Kernelin pääohjelma (C)
-- `src/mem.c`/`mem.h` — Muistinhallinta
-- `src/task.c`/`task.h` — Prosessinhallinta
-- `src/io.c`/`io.h` — I/O
-- `src/syscall.c`/`syscall.h` — System call -rajapinta
-- `src/shell.c`/`shell.h` — Yksinkertainen shell
