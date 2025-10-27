@@ -6,6 +6,8 @@
 #include "syscall.h"
 #include "timer.h"
 #include "isr.h"
+#include "shell.h"
+
 
 void print(const char *str, int row) {
     char *vidptr = (char*)0xb8000 + row * 160;
