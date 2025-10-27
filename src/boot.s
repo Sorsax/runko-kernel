@@ -1,9 +1,9 @@
 # Kernel entry (multiboot)
-.section .multiboot
+.section .multiboot, "a"
 .align 4
 .long 0x1BADB002
 .long 0x00000000
-.long 0xE4524FFB
+.long -(0x1BADB002 + 0x00000000)
 
 .section .text
 .global _start
