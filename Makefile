@@ -12,7 +12,7 @@ LDFLAGS = -T linker.ld
 SRC_C = kernel.c mem.c cpu.c io.c task.c syscall.c shell.c timer.c isr.c
 SRC_ASM = boot.s
 
-SRC_OBJS = $(addprefix $(SRC)/,$(SRC_C:.c=.o)) $(SRC)/boot.o
+SRC_OBJS = $(SRC)/boot.o $(addprefix $(SRC)/,$(SRC_C:.c=.o))
 
 all: $(BUILD)/$(ISO_NAME)
 
