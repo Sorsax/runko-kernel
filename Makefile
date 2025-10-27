@@ -22,9 +22,9 @@ $(SRC)/%.o: $(SRC)/%.c
 $(SRC)/boot.o: $(SRC)/boot.s
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(BUILD)/$(ISO_NAME): $(BUILD)/kernel.bin $(BOOT)/grub.cfg
+$(BUILD)/$(ISO_NAME): $(BUILD)/kernel.elf $(BOOT)/grub.cfg
 	mkdir -p $(BUILD)/iso/boot/grub
-	cp $(BUILD)/kernel.bin $(BUILD)/iso/boot/kernel.bin
+	cp $(BUILD)/kernel.elf $(BUILD)/iso/boot/kernel.elf
 	cp $(BOOT)/grub.cfg $(BUILD)/iso/boot/grub/grub.cfg
 	grub-mkrescue -o $@ $(BUILD)/iso
 
