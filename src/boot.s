@@ -7,16 +7,16 @@
 
 .section .text
 .global _start
+.section .text
+.global _start
 _start:
-    mov $0x03, %al
-    mov $0x00, %ah
-    int $0x10
-
-    mov $stack_top, %esp
-    call kernel_main
-    cli
-1:  hlt
-    jmp 1b
+    mov $0xb8000, %edi
+    mov $'O', %al
+    mov $0x0F, %ah
+    movw %ax, (%edi)
+.hang:
+    hlt
+    jmp .hang
 
 .section .bss
 .align 16

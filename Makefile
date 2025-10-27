@@ -22,10 +22,6 @@ $(SRC)/%.o: $(SRC)/%.c
 $(SRC)/boot.o: $(SRC)/boot.s
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(BUILD)/kernel.bin: $(SRC_OBJS)
-	mkdir -p $(BUILD)
-	$(LD) $(LDFLAGS) -n -e _start --oformat binary -o $@ $(SRC_OBJS)
-
 $(BUILD)/$(ISO_NAME): $(BUILD)/kernel.bin $(BOOT)/grub.cfg
 	mkdir -p $(BUILD)/iso/boot/grub
 	cp $(BUILD)/kernel.bin $(BUILD)/iso/boot/kernel.bin
@@ -34,6 +30,17 @@ $(BUILD)/$(ISO_NAME): $(BUILD)/kernel.bin $(BOOT)/grub.cfg
 
 run: $(BUILD)/$(ISO_NAME)
 	qemu-system-i386 -cdrom $< -serial stdio -m 512 -display gtk
+
+direct: $(BUILD)/kernel.bin
+
+	qemu-system-i386 -kernel $< -m 512 -display gtk
+
+$(BUILD)/kernel.elf: $(SRC_OBJS)
+	mkdir -p $(BUILD)
+	$(LD) $(LDFLAGS) -n -e _start -o $@ $(SRC_OBJS)
+
+elf: $(BUILD)/kernel.elf
+	qemu-system-i386 -kernel $< -m 512 -display gtk
 
 clean:
 	rm -rf $(BUILD)/*.o $(SRC)/*.o $(BUILD)/*.bin $(BUILD)/iso $(BUILD)/*.iso
